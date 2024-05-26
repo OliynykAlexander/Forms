@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Форми</title>
+    <link rel="stylesheet" href="forms.css">
+</head>
+<body>
+    <form action="" name="form1" onsubmit="return validateForm()">
+        <label for="fname">Enter your name</label>
+        <input type="text" name="fname" size="20" maxlength="20" value="name"><br>
+        <input type="text" name="fname" size="20" maxlength="20" value="name" disabled><br>
+        <input type="text" name="fname" size="20" maxlength="20" value="name" readonly><br>
+        <label for="password">Enter your password
+        <input type="password" name="password" size="20" maxlength="20"></label><br>
+        Choose language
+            <input type="checkbox" name="lang1" value="english" class="cb">english
+            <input type="checkbox" name="lang2" value="french" class="cb">french
+            <input type="checkbox" name="lang3" value="spanish" class="cb">spanish
+            <input type="checkbox" name="lang4" value="german" class="cb">german
+        <br>
+        Your gender?
+            <input type="radio" name="gender" value="male" class="rb">male
+            <input type="radio" name="gender" value="female" class="rb">female
+        <br>
+        <input type="submit" value="Submit" class="inbp">
+        <input type="reset" value="Reset" class="inbp">
+        <label for="default">
+            <select name="default" id="default">
+                <optgroup label="Default group">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                </optgroup>
+                <option value="3" selected>3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </label>
+    </form>
+    <script>
+        function validateForm() {
+          const nameInput = document.getElementsByName("fname")[0];
+          const passwordInput = document.getElementById("password");
+          const selectedLang = document.querySelectorAll('input[type="checkbox"]:checked');
+          const selectedGender = document.querySelector('input[type="radio"]:checked');
+          const selectElement = document.getElementById("default");
+          const selectedValue = selectElement.value;
+          if (nameInput.value === "") {
+            alert("Please enter your name");
+            return false;
+          }
+          const formData = {
+            name: nameInput.value,
+            password: passwordInput.value,
+            languages: [...selectedLang].map(lang => lang.value),
+            gender: selectedGender?.value,
+            defaultOption: selectedValue
+          };
+          console.log("Form data:", formData);
+        
+          return true;
+        }
+    </script>
+</body>
+</html>
